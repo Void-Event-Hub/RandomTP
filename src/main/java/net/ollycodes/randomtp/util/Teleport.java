@@ -27,7 +27,7 @@ public class Teleport {
         continueCheck.add("block.minecraft.void_air");
 
         for (int y = 320; y > -64; y--) {
-            BlockPos pos = BlockPos.ofFloored(x, y, z);
+            BlockPos pos = BlockPos.fromLong(BlockPos.asLong(x, y, z));
             String blockName = world.getBlockState(pos).getBlock().getTranslationKey();
             if (preventSpawn.contains(blockName)) return null;
             if (!continueCheck.contains(blockName)) {
@@ -60,12 +60,12 @@ public class Teleport {
         }
         int newX = ModConfig.centerX + (int) (Math.random() * ModConfig.spawnRadius * 2) - ModConfig.spawnRadius;
         int newZ = ModConfig.centerZ + (int) (Math.random() * ModConfig.spawnRadius * 2) - ModConfig.spawnRadius;
-        Integer newY = getYCoord(target.getServerWorld(), newX, newZ);
+        Integer newY = getYCoord(target.getWorld(), newX, newZ);
         if (newY == null) {
             randomTP(target, tries + 1);
             return;
         }
-        if (!checkPosition(target.getServerWorld(), newX, newY, newZ)) {
+        if (!checkPosition(target.getWorld(), newX, newY, newZ)) {
             randomTP(target, tries + 1);
             return;
         }

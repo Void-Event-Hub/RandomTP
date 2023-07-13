@@ -29,7 +29,7 @@ public class ResetJoinCommand {
                     );
                     return 1;
                 }
-                player.getCommandTags().remove(PlayerJoinEvent.firstJoinTag);
+                player.removeScoreboardTag(PlayerJoinEvent.firstJoinTag);
                 context.getSource().sendMessage(Text.literal("[RandomTP] First join tag removed").formatted(Formatting.GREEN));
                 return 1;
             })
@@ -41,7 +41,7 @@ public class ResetJoinCommand {
             .executes(context -> {
                 Collection<ServerPlayerEntity> targets = getPlayers(context, "target");
                 for (ServerPlayerEntity target : targets) {
-                    target.getCommandTags().remove(PlayerJoinEvent.firstJoinTag);
+                    target.removeScoreboardTag(PlayerJoinEvent.firstJoinTag);
                 }
                 context.getSource().sendMessage(Text.literal("[RandomTP] Remove first join tag from " + targets.size() + " players").formatted(Formatting.GREEN));
                 return 1;

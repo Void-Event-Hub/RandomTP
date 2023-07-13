@@ -13,11 +13,11 @@ public class PlayerJoinEvent {
 
     public static void onSpawn(ServerPlayNetworkHandler serverPlayNetworkHandler, PacketSender packetSender, MinecraftServer minecraftServer) {
         ServerPlayerEntity player = serverPlayNetworkHandler.player;
-        if (player.getCommandTags().contains(firstJoinTag)) {
+        if (player.getScoreboardTags().contains(firstJoinTag)) {
             RandomTP.LOGGER.info("Returning player " + player.getName().getString() + " joined");
             return;
         }
-        player.getCommandTags().add(firstJoinTag);
+        player.addScoreboardTag(firstJoinTag);
         RandomTP.LOGGER.info("New player " + player.getName().getString() + " joined");
         if (ModConfig.teleportOnFirstJoin) {
             Teleport.randomTP(player, 0);
